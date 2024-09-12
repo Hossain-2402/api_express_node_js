@@ -2,6 +2,9 @@ const express =  require("express");  // import express
 const app = express(); // make app using EXPRESS
 const bodyParser = require('body-parser'); 
 const mongoose = require('mongoose');
+const serverless = require('serverless-http');
+
+const router = express();
 
 const morgan = require('morgan');
 
@@ -19,9 +22,17 @@ mongoose.connect(mongoURI,{})
   .catch(err => console.error('Error connecting to MongoDB:'));
 
 
+router.get("/",(req,res)=>{
+  res.status(200).json({ message : "new message" })
+});
+
 app.use("/products",products);
 app.use("/users",users);
 
+
+
+app.use('/.netlify/functions/index', router); 
+module.exports.handler = serverless(app);
 
 
 module.exports = app;
