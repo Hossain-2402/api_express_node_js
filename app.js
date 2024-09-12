@@ -10,6 +10,12 @@ const morgan = require('morgan');
 const products = require("./my_api/routs/products");
 const users = require("./my_api/routs/user");
 
+
+app.use((res,req,next)=>{
+  res.setHeaders("Access-Control-Allow-Origin","*");
+  res.setHeaders("Access-Control-Allow-Headers","*");
+})
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json({}));
