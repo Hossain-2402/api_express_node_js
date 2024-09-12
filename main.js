@@ -1,7 +1,7 @@
 const http = require("http"); // import http
 const app = require("./app");
 
-const port = process.env.PORT || 3000  // make a port/URL 
+// const port = process.env.PORT || 3000  // make a port/URL 
 
 const server = http.createServer(app); // make a server using HTTP
 
