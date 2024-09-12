@@ -2,14 +2,13 @@ const express =  require("express");  // import express
 const app = express(); // make app using EXPRESS
 const bodyParser = require('body-parser'); 
 const mongoose = require('mongoose');
-const serverless = require('serverless-http');
 
 const router = express();
 
 const morgan = require('morgan');
 
-const products = require("./api/routs/products");
-const users = require("./api/routs/user");
+const products = require("./my_api/routs/products");
+const users = require("./my_api/routs/user");
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({extended: false}));
@@ -29,10 +28,6 @@ router.get("/",(req,res)=>{
 app.use("/products",products);
 app.use("/users",users);
 
-
-
-app.use('/.netlify/functions/index', router); 
-module.exports.handler = serverless(app);
 
 
 module.exports = app;
